@@ -7,9 +7,9 @@
  *  1. Include the header file "printf2uart.h" in the main program ("main.c").
  *  2. The UART should already be initialised in the main program.
  *
- *  Created on: 19 April 2017
- *      Author: Ori Novanda
- *       Email: cargmax-at-gmail.com
+ *  First created on: 19 April 2017
+ *            Author: Ori Novanda
+ *             Email: cargmax-at-gmail.com
  *
  */
 
@@ -18,6 +18,13 @@
 
 #warning "TARGET_USART must already be initialised."
 
+#if TOOLCHAIN_TARGET == TOOLCHAIN_TARGET_MDK_ARM
+int fputc(int c, FILE *f) {
+	while ((TARGET_USART->ISR & TX_EMPTY_FLAG) == RESET);
+	TARGET_USART->TDR = (char) c;
+	return c;
+}
+#else
 int _write(int file, char *data, int len) {
 	for(uint32_t i=0; i<len; i++) {
 		char ch = data[i];
@@ -26,3 +33,4 @@ int _write(int file, char *data, int len) {
 	}
 	return len;
 }
+#endif

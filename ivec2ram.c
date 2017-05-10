@@ -11,16 +11,16 @@
  *  Usage:
  *  1. Include the header file "ivec2ram.h" in the main program ("main.c"). No function call is needed. The Remap_Interrupt_Vector_to_RAM() will run automatically before main().
  *  2. Change the value of IV_SECTION_NAME parameter to match the definition in the ld file for the mapping allocation (0x2000'0000). Add a new section if necessary.
- *     To make/force your our section, put these lines in the very beginning of the section declaration in the ld file (change the section name accordingly):
+ *     To make/force your own section, put these lines in the very beginning of the section declaration in the ld file (change the section name accordingly):
  *	   .your_iv_section_name :
  *	   {
  *	     *(.your_iv_section_name)
  *	   } >RAM
  *
  *
- *  Created on: 19 April 2017
- *      Author: Ori Novanda
- *       Email: cargmax-at-gmail.com
+ *  First created on: 19 April 2017
+ *            Author: Ori Novanda
+ *             Email: cargmax-at-gmail.com
  *
  */
 
